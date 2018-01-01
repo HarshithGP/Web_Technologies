@@ -1,0 +1,190 @@
+/* code developed by Harshith Guru Prasad, USC ID: 2735-0858-94
+    Web Tech CSCI 571, Fall 16
+*/
+
+
+body {         
+            min-width:745px;
+            margin: 0 auto;
+            width:50%;
+            background-image:url(bg.png); 
+            font-family: "Trebuchet MS", arial,sans-serif, serif;      
+    }
+
+#a {    
+		font-size : 40px;  
+		position:absolute;
+		font-weight: bold;
+		padding-top: 30px; 
+		
+    }
+
+#b {   
+		font-weight:bold;
+		position:relative;
+		font-size:15px; 
+		padding-top:54px;
+		padding-left :245px;
+    }
+	
+#c {   
+		font-weight:bold;
+		position:absolute;
+		font-size:15px; 
+		padding-top:8px;
+    }
+
+a { text-decoration: none;}
+
+a:link,a:visited{color:black;}
+
+a:active{ background-color:#C9434F; color:white; padding:2% 2%;}
+
+.MainHeader nav {background-color:black; height:32px; border-radius: 5px; margin-top: 25px;}
+
+.MainHeader nav ul{ list-style:none; margin-left: -0.5em;}
+
+.MainHeader nav ul li{float:left; display: inline; color:white;}
+
+.MainHeader nav a:link, .MainHeader nav a:visited {color:#FFF; display:inline-block; padding:6px 17px; height:20px;}
+
+.MainHeader nav a:active, .MainHeader nav .active a:link, .MainHeader nav .active a:visited 
+{ background-color:#C9434F; height:20px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;}
+
+.MainHeader nav a:hover {background-color: #C9434F;}
+
+
+.MainContent
+{
+    background-color:white;
+    border-radius: 15px;
+    float:left;
+    padding: 1% 3%;
+    margin-top: 25px;
+    line-height: 0.65;
+    width:94%;
+}
+
+.textContent
+{
+    font-size: 13px;
+    width:60%;
+    font-weight: 600;
+}
+
+.logo
+{
+    float:right;
+    display:inline;
+    
+    margin:-140px 20px;
+    border:4px solid #F7F6F2;
+}
+
+.NextContent
+{
+    margin-top: 200px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 2% 2%;
+    font-size:13px;
+    padding-left: 60px;
+    font-weight:500;
+}
+
+.RTG2, .RTG5
+{
+    color:#C9434F; 
+    font-size:18px; 
+    font-weight:600;
+    
+}
+
+
+.RTG1, .RTG3, .RTG4, .RTG6 {color:#C9434F;}
+
+.s1,.s2,.s3,.s4,.s5,.s6 {color:white;}
+
+.TopPart:hover .s1, .TopPart:hover .s2, .TopPart:hover .s3 {color:#C9434F;}
+.BottomPart:hover .s4, .BottomPart:hover .s5, .BottomPart:hover .s6 {color:#C9434F;}
+
+.TopPart:hover, .BottomPart:hover
+{
+    background-color: #C9434F;
+    color:white;
+}
+
+.TopPart:hover .RTG2, .BottomPart:hover .RTG5
+{
+    color:gold; 
+    font-size:18px; 
+    font-weight:bold;   
+}
+
+.TopPart:hover .RTG1, .TopPart:hover .RTG3, .BottomPart:hover .RTG4, .BottomPart:hover .RTG6
+{
+    color:gold;
+}
+
+
+.FinalContent ul 
+{
+    margin:0; line-height: 1.5;
+    vertical-align: middle;
+}
+
+.FinalContent td:hover, .FinalContent td a:hover {background-color: #C9434F; color:white;}
+
+
+.social
+{
+    float:right;
+    width:25%;
+    margin-top: -85px;
+    font-size: 14px;
+    font-weight:400;
+}
+
+.LastContent
+{
+    margin-top: 5px;
+    background: white;
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top:5px;
+}
+
+.lastLogo
+{
+    float:right;
+    margin-top: -55px;
+    margin-right: 500px;
+    
+}
+
+.info
+{
+    float:right;
+    margin-top: -70px;
+    margin-right: 20px;
+    font-weight:500;
+}
+
+.foot
+{
+    margin-top: 20px;
+    text-align: right;
+    font-size: 13px;
+    font-weight:500;
+}
+
+
+/*@media only screen and (min-width:150px) (max-width:700px)
+{
+    body
+    {
+        width:100%;
+    }  
+    
+}*/
