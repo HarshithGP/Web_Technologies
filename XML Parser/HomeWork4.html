@@ -1,0 +1,206 @@
+<!--CSCI 571 FALL 2016
+
+Homework Assignment #4 - XML Parser using DOM and JavaScript
+
+Code developed by Harshith Guru Prasad
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <title>XML Parser</title>    
+    <meta charset="utf-8"/>
+    <script type="text/javascript">
+      
+    var xmlDoc;
+        
+    function validate()
+    {  
+        // to determine if a URL has been entered
+        var n=url.value;
+        if (n.length < 1||n==" "||n=="  "||n=="   ")
+        {
+            alert("URL Required !");
+            return false;
+        }
+        
+        else
+        {   
+            // if a valid URL is entered, the XML file is loaded to be parsed
+            xmlDoc=loadXML(n);
+            parse(xmlDoc);
+        }
+    }    
+        
+    function loadXML(url) 
+    {
+        if (window.XMLHttpRequest)      
+            xmlhttp=new XMLHttpRequest(); //code for IE7+, Firefox, Chrome, Opera, Safari
+        else
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); // code for IE6, IE5
+        
+        xmlhttp.open("GET",url,false);//open, send, responseXML false-synchronous
+        try
+        {
+            xmlhttp.send(); //properties of XMLHTTPRequest
+        }
+        catch(err)
+        {
+            alert("File does not exist !");
+            return false;
+        }
+          
+        xmlDoc=xmlhttp.responseXML;
+            
+        return xmlDoc;
+    }
+    
+    function parse(xmlDoc)
+    {
+        if (xmlDoc.getElementsByTagName("parsererror").length > 0)
+        {
+                alert("Error in XML File !");
+                return false;
+        }
+        
+        papers=xmlDoc.getElementsByTagName("Row");
+        if(papers.item(0)==null)
+        {
+            alert("No News Papers Present !");
+            return false;
+        }
+        
+        else //else if FF, execute script once XML object has loaded
+        {  
+            xmlDoc.onload=generateHTML(xmlDoc);
+            Table_Window = window.open("", "HomeWork4", "scrollbars=1,height=600,width=950");
+            Table_Window.document.open();
+            Table_Window.document.write(html_text);  
+            Table_Window.document.close();
+        }
+            
+    } 
+              
+    function generateHTML(xmlDoc)
+    {  
+        ELEMENT_NODE = 1;
+        // MS parser doesn't define Node.ELEMENT_NODE
+        root=xmlDoc.DocumentElement;
+        
+        html_text="<html><head><title>XML Parse Result</title></head><body>";
+        html_text+="<table border='2'>";
+        html_text+="<tbody>";
+        html_text+="<tr>";
+        
+        H=xmlDoc.getElementsByTagName("Header")[0];
+        dataTag=H.getElementsByTagName("Data");
+        
+	   // output the headers
+        for(i=0;i<dataTag.length;i++)
+        {  
+            if(dataTag[i].nodeType==ELEMENT_NODE)
+			 {   
+                header=dataTag[i].firstChild.nodeValue;
+                 
+			     html_text+="<th>"+header+"</th>";  
+             }   
+        }
+           
+        html_text+="</tr>";
+       //Table header data is done
+        
+        
+        papers=xmlDoc.getElementsByTagName("Row");
+            
+        for(i=0;i<papers.length;i++) //do for all newpapers
+        {  
+            
+            html_text+="<tr>";
+            
+            if(papers[i].getElementsByTagName("Slot")[0] == null || papers[i].getElementsByTagName("Slot")[0].childNodes[0] == null)
+                slot="";
+            else
+                slot=papers[i].getElementsByTagName("Slot")[0].childNodes[0].nodeValue;
+            html_text+="<td>"+slot+"</td>";
+            
+            
+            
+            if(papers[i].getElementsByTagName("Newspaper")[0] == null || papers[i].getElementsByTagName("Newspaper")[0].childNodes[0] == null)
+                newspaper="";
+            else
+                newspaper=papers[i].getElementsByTagName("Newspaper")[0].childNodes[0].nodeValue;
+            html_text+="<td>"+newspaper+"</td>";
+            
+            
+            
+            Location = papers[i].getElementsByTagName("Location");
+            if(Location[0].getElementsByTagName("City")[0] == null || Location[0].getElementsByTagName("City")[0].childNodes[0] == null)
+                city = "N.A";
+            else
+                city = Location[0].getElementsByTagName("City")[0].childNodes[0].nodeValue;
+			
+            if(Location[0].getElementsByTagName("State")[0] == null || Location[0].getElementsByTagName("State")[0].childNodes[0] == null ) 
+                state = "N.A";			
+            else
+                state = Location[0].getElementsByTagName("State")[0].childNodes[0].nodeValue;
+            
+            if(city=="N.A"&&state=="N.A")
+            html_text+="<td></td>";
+            else if(city=="N.A"&&state!="N.A")
+                html_text+="<td><ul><li>"+state+"</li></ul></td>";
+            else if(city!="N.A"&&state=="N.A")
+                html_text+="<td><ul><li>"+city+"</li></ul></td>";
+            else
+               html_text+="<td><ul><li>"+city+"</li><li>"+state+"</li></ul></td>"; 
+            
+            
+            if(papers[i].getElementsByTagName("HomePage")[0] == null || papers[i].getElementsByTagName("HomePage")[0].childNodes[0] == null)
+                homepage="";
+            else
+                homepage=papers[i].getElementsByTagName("HomePage")[0].childNodes[0].nodeValue;
+             html_text+="<td><a href=\""+homepage+"\"/a>"+homepage+"</td>";
+            
+            
+            if(papers[i].getElementsByTagName("Logo")[0] == null || papers[i].getElementsByTagName("Logo")[0].childNodes[0] == null)
+            {
+                 logo="";
+                 html_text+="<td><img src=\" \" width=300 height=175 /></td>";
+            }   
+            else
+            {
+                logo=papers[i].getElementsByTagName("Logo")[0].childNodes[0].nodeValue;
+                html_text+="<td><img src=\""+logo+"\" width=300 height=175 /></td>";
+            }
+            
+            
+            
+             html_text+="</tr>";
+        }
+            
+        html_text+="</tbody>";  
+        html_text+="</table>";
+        html_text+="<noscript></noscript>";
+        html_text+="</body></html>";  
+    }
+    
+    </script>
+</head>    
+    
+    <!--body part of the HTML code-->
+    <body>
+        <center>
+            <div style="width:500px; margin:200px auto;"> 
+                <form action=" " > 
+                    <h2>Enter URL for Newspaper List XML File</h2>    
+                    <input type="text" maxlength="100" size="40" id="url"/><br/><br/>
+                    <input type="button" value="Submit Query" onclick="validate()" />
+                </form>
+            </div> 
+        </center>  
+        
+    <noscript></noscript>    
+    </body>   
+</html>    
